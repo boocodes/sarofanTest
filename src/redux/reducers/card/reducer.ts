@@ -18,10 +18,10 @@ interface IAddCard{
     imagesSource: string;
 }
 interface IDeleteCard{
-    cardsForDelete: ICardElement;
+    id: string;
 }
 interface ILikeCard{
-    carForLike: ICardElement;
+    id: string;
 }
 
 export const CardReducer = createSlice({
@@ -32,12 +32,12 @@ export const CardReducer = createSlice({
             state.cardsArray.push(payload);
         },
         deleteCard: (state, {payload}:PayloadAction<IDeleteCard>)=> {
-            state.cardsArray = state.cardsArray.filter(card => card.id !== payload.cardsForDelete.id);
+            state.cardsArray = state.cardsArray.filter(card => card.id !== payload.id);
         },
         likeCard: (state, {payload}:PayloadAction<ILikeCard>)=>{
             state.cardsArray.map(card=>{
-                if(card.id === payload.carForLike.id){
-                    card.isLikedFlag = true;
+                if(card.id === payload.id){
+                    card.isLikedFlag = !card.isLikedFlag;
                 }
             })
         }
