@@ -43,3 +43,7 @@ export const CardReducer = createSlice({
 })
 
 
+export const {addCard, likeCard, deleteCard} = CardReducer.actions;
+export default CardReducer.reducer;
+
+
