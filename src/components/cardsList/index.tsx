@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 
 
@@ -13,9 +13,9 @@ function CardsList(props:Props){
     
     return(
         <>
-       
-        hi
-        
+            {
+                
+            }
         </>
     )
 }
