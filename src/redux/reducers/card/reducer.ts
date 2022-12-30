@@ -13,7 +13,9 @@ const initialState:ICardsArray = {
 
 
 interface IAddCard{
-    newCard: ICardElement;
+    id: string;
+    isLikedFlag: boolean;
+    imagesSource: string;
 }
 interface IDeleteCard{
     cardsForDelete: ICardElement;
@@ -27,7 +29,7 @@ export const CardReducer = createSlice({
     name: 'card',
     reducers: {
         addCard: (state, {payload}:PayloadAction<IAddCard>) => {
-            state = Object.assign(state, payload.newCard);
+            state.cardsArray.push(payload);
         },
         deleteCard: (state, {payload}:PayloadAction<IDeleteCard>)=> {
             state.cardsArray = state.cardsArray.filter(card => card.id !== payload.cardsForDelete.id);
