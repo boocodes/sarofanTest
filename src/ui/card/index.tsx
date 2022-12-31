@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {likeCard, useAppDispatch} from '../../';
+import {likeCard, useAppDispatch, deleteCard} from '../../';
 
 interface Props{
     imageSource: string;
@@ -13,6 +13,9 @@ function Card(props: Props){
     const dispatch = useAppDispatch();
     return(
         <ExternalWrapper isLikedFlag={props.isLikedFlag}>
+            <DeleteButtonWrapper>
+                <DeleteIcon onClick={()=>dispatch(deleteCard({id: props.id}))} src="./images/deleteIcon.png"/>
+            </DeleteButtonWrapper>
             <ImageWrapper>
                 <ResponseImage src={props.imageSource}/>
             </ImageWrapper>
@@ -44,6 +47,19 @@ const ExternalWrapper = styled.div<IExternalWrapper>`
     padding-bottom: 30px;
     border-radius: 10px;
     
+`
+const DeleteButtonWrapper = styled.div`
+
+`
+const DeleteIcon = styled.img`
+    cursor: pointer;
+    :hover{
+        opacity: 0.5;
+        transition: 0.5s;
+    }
+    width: 40px;
+    margin-left: 130px;
+    margin-top: 20px;
 `
 const ImageWrapper = styled.div`
     position: relative;
