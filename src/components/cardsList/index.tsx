@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
-import {useAppSelector, useAppDispatch, addCard, selectAllCards, Card} from '../../';
-
+import {useAppSelector, useAppDispatch, addCard, selectAllCards, CardListRendering} from '../../';
 
 interface Props{
 
@@ -31,29 +30,9 @@ function CardsList(props:Props){
     return(
         <ExternalWrapper>
             <SortButtonWrapper>
-                <SortButton onClick={()=>setSortByLikesFlag(!sortByLikesFlag)}>Sort by likes</SortButton>
+                <SortButton sortingByLikesFlag={sortByLikesFlag} onClick={()=>setSortByLikesFlag(!sortByLikesFlag)}>Sort by likes</SortButton>
             </SortButtonWrapper>
-            <CardsListWrapper>
-                {
-                    // checking sort by likes flag
-                    sortByLikesFlag === false ? 
-                    // if flag false then will show all cards
-                        cards.map(card=>{
-                            return (
-                                <Card key={card.id} imageSource={card.imagesSource} cardText={'simple text'} isLikedFlag={card.isLikedFlag} id={card.id}/>
-                            )
-                        })
-                        :
-                        // if flag is true then will show only liked cards
-                        cards.map(card=>{
-                            if(card.isLikedFlag){
-                                return (
-                                    <Card key={card.id} imageSource={card.imagesSource} cardText={'simple text'} isLikedFlag={card.isLikedFlag} id={card.id}/>
-                                )
-                            }
-                        })
-                }
-            </CardsListWrapper>
+            <CardListRendering sortingByLikesFlag={sortByLikesFlag}/>
         </ExternalWrapper>
     )
 }
@@ -68,18 +47,20 @@ const ExternalWrapper = styled.div`
 const SortButtonWrapper = styled.div`
     margin-top: 100px;
 `
-const SortButton = styled.button`
+
+interface ISortButton{
+    sortingByLikesFlag: boolean;
+}
+
+
+const SortButton = styled.button<ISortButton>`
     font-size: 22px;
     cursor: pointer;
     text-transform: uppercase;
     padding: 10px 15px;
+    background: ${props=>props.sortingByLikesFlag === false ? 'none' : 'green'}
 `
 
-const CardsListWrapper = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 100px;
-`
+
 
 export default CardsList;
