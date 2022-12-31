@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
-import {useAppSelector, useAppDispatch, addCard, selectAllCards, CardListRendering} from '../../';
+import {useAppSelector, useAppDispatch, addCard, selectAllCards, CardListRendering, resetCards} from '../../';
 
 interface Props{
 
@@ -12,6 +12,7 @@ function CardsList(props:Props){
     const disptach = useAppDispatch();
     // component did mount 
     useEffect(()=>{
+        disptach(resetCards());
         // function to get a images from api
         for(let i = 1; i <= 5; i++){
             const response = fetch('https://dog.ceo/api/breeds/image/random')
