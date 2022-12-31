@@ -40,12 +40,15 @@ export const CardReducer = createSlice({
                     card.isLikedFlag = !card.isLikedFlag;
                 }
             })
-        }
+        },
+        resetCards: (state) => {
+            state.cardsArray = [];
+        },
     }
 })
 
 
-export const {addCard, likeCard, deleteCard} = CardReducer.actions;
+export const {addCard, likeCard, deleteCard, resetCards} = CardReducer.actions;
 export default CardReducer.reducer;
 
 
